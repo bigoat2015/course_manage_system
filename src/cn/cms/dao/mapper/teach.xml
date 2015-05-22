@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+	<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="cn.cms.dao.ITeach">
+	
+	<insert id="add" parameterType="Teach">
+    	insert into teach(id,classId,teacherId,courseId,credit,period,examination) 
+    		values(#{id},#{classId},#{teacherId},#{courseId},#{credit},#{period},#{examination})
+    </insert>
+	
+	
+	 <delete id="delete" parameterType="String">
+        delete from teach where id=#{id}
+    </delete>
+    
+    
+    <update id="update" parameterType="Teach">
+        update teach set classId=#{classId},teacherId=#{teacherId},courseId=#{courseId},credit=#{credit},period=#{period},examination=#{examination} where id=#{id}
+    </update>
+    
+    
+    <select id="findByClassId" parameterType="String" resultType="Teach">
+        select * from teach where classId=#{classId} 
+    </select>
+    
+    <select id="findById" parameterType="String" resultType="Teach">
+        select * from teach where id=#{id} 
+    </select>
+	
+	 <select id="findByTeacherId" parameterType="String" resultType="Teach">
+        select * from teach where teacherId=#{teacherId}
+     </select>
+     
+     <select id="findAll" resultType="Teach">
+        select * from teach
+     </select>
+	
+	
+<!--	 findById必须和接口中的方法名一样  返回一个User  就是刚才的别名  如果不弄别名要连类路径一起写 麻烦-->
+<!--	<select id="findById" parameterType="School" resultType="boolean">-->
+<!--		select-->
+<!--		* from butone.student where id=#{id}-->
+<!--    </select>-->
+<!--    -->
+</mapper>

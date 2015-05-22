@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <typeAliases>
+        <typeAlias alias="School" type="cn.cms.mode.School"/>
+        <typeAlias alias="Campus" type="cn.cms.mode.Campus"/>
+        <typeAlias alias="TeachBuild" type="cn.cms.mode.TeachBuild"/>
+        <typeAlias alias="Classroom" type="cn.cms.mode.Classroom"/>
+        <typeAlias alias="Teacher" type="cn.cms.mode.Teacher"/>
+        <typeAlias alias="Class" type="cn.cms.mode.Class"/>
+        <typeAlias alias="Student" type="cn.cms.mode.Student"/>
+        <typeAlias alias="Course" type="cn.cms.mode.Course"/>
+        <typeAlias alias="TimeTable" type="cn.cms.mode.TimeTable"/>
+        <typeAlias alias="User" type="cn.cms.mode.User"/>
+        <typeAlias alias="Teach" type="cn.cms.mode.Teach"/>
+        <typeAlias alias="TeachTime" type="cn.cms.mode.TeachTime"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+        <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+            <property name="driver" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://127.0.0.1:3306/cms" />
+            <property name="username" value="root"/>
+            <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <mapper resource="cn/cms/dao/mapper/school.xml"/>
+        <mapper resource="cn/cms/dao/mapper/campus.xml"/>
+        <mapper resource="cn/cms/dao/mapper/teachBuild.xml"/>
+        <mapper resource="cn/cms/dao/mapper/classroom.xml"/>
+        <mapper resource="cn/cms/dao/mapper/teacher.xml"/>
+        <mapper resource="cn/cms/dao/mapper/class.xml"/>
+        <mapper resource="cn/cms/dao/mapper/student.xml"/>
+        <mapper resource="cn/cms/dao/mapper/course.xml"/>
+        <mapper resource="cn/cms/dao/mapper/timeTable.xml"/>
+        <mapper resource="cn/cms/dao/mapper/user.xml"/>
+        <mapper resource="cn/cms/dao/mapper/teach.xml"/>
+        <mapper resource="cn/cms/dao/mapper/teachTime.xml"/>
+    </mappers>
+    
+</configuration>

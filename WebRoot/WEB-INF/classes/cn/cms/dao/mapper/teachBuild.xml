@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+	<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="cn.cms.dao.ITeachBuild">
+	
+	<!--	 add必须和接口中的方法名一样  就是刚才的别名  如果不弄别名要连类路径一起写 麻烦-->
+	<insert id="add" parameterType="TeachBuild" keyProperty="id">
+    	insert into teachBuild(id,name,campusId) 
+    		values(#{id},#{name},#{campusId})
+    </insert>
+	
+	
+	 <delete id="delete" parameterType="String">
+        delete from teachBuild where id=#{id}
+    </delete>
+    
+    
+    <update id="update" parameterType="TeachBuild">
+        update teachBuild set name=#{name},campusId=#{campusId} where id=#{id}
+    </update>
+    
+    
+    <select id="findById" parameterType="String" resultType="TeachBuild">
+        select * from teachBuild where id=#{id} 
+    </select>
+	
+	 <select id="findAll" resultType="TeachBuild">
+        select * from teachBuild
+     </select>
+	
+	
+</mapper>

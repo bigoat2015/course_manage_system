@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	 <!-- 请求参数的编码方式 -->  
+    <constant name="struts.i18n.encoding" value="UTF-8"/>  
+    <!-- 指定被struts2处理的请求后缀类型。多个用逗号隔开 -->  
+<!--    <constant name="struts.action.extension" value="action,do,go,html"/>  -->
+    <!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开  -->  
+    <constant name="struts.configuration.xml.reload" value="true"/>  
+    <!-- 是否使用struts的开发模式。开发模式会有更多的调试信息。默认值为false(生产环境下使用),开发阶段最好打开  -->  
+    <constant name="struts.devMode" value="true"/>  
+    <!-- 设置浏览器是否缓存静态内容。默认值为true(生产环境下使用),开发阶段最好关闭  -->  
+    <constant name="struts.serve.static.browserCache" value="false" />  
+    <!-- 是否允许在OGNL表达式中调用静态方法，默认值为false -->  
+<!--    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>  -->
+      
+    <!-- 指定由spring负责action对象的创建   
+    <constant name="struts.objectFactory" value="spring" />  
+    -->  
+    <!-- 是否开启动态方法调用 -->  
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>  
+	
+	<!--	  配置方法级别的校验 -->
+	
+    <package name="default"  extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="checklogin" class="cn.cms.action.interceptor.CheckLoginInterceptor"></interceptor> 
+			<interceptor-stack name="login">
+				<interceptor-ref name="checklogin"  />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="login"></default-interceptor-ref>
+		<default-action-ref name="login"></default-action-ref>
+		
+		<global-results>
+			<result name="error">/error.jsp</result>
+			<result name="index" type="redirect">/login.jsp</result>
+		</global-results>
+		
+		<action name="index">
+			<result type="redirect">/login.jsp</result>
+		</action>
+	
+        <action name="login" class="cn.cms.action.LoginAction" method="login">
+            <result name="input">/login.jsp</result>
+            <result name="admin">/WEB-INF/jsp/admin.jsp</result>
+            <result type="redirectAction" name="main">
+			    <param name="actionName">main</param>
+			</result>
+        </action>
+        
+        <action name="main">
+        	<result>/WEB-INF/jsp/main.jsp</result>
+        </action>
+        
+        <action name="logout" class="cn.cms.action.LogoutAction" method="logout">
+        </action>
+        
+        <action name="regist" class="cn.cms.action.RegistAction" method="regist">
+        	<result name="input">/regist.jsp</result>
+        	<result>/login.jsp</result>
+        </action>
+    
+    	<action name="validateCodeAction" class="cn.cms.action.ValidateCodeAction">
+    		<result>/WEB-INF/jsp/validateCode.jsp</result>
+    	</action>
+    	
+    	
+    	<action name="admin-*" class="cn.cms.action.AdminAction" method="{1}">
+       		<result>/WEB-INF/jsp/admin.jsp</result>
+       	</action>
+ 
+       	<action name="json-*" class="cn.cms.action.JsonAction" method="{1}">
+       	</action>
+       	
+       	<action name="*Action" class="cn.cms.action.{1}Action">
+       		<result name="input"></result>
+       	</action>
+    	
+    </package>
+    
+
+</struts>

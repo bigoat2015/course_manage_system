@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+	<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="cn.cms.dao.IClassroom">
+	
+	<insert id="add" parameterType="Classroom" keyProperty="id">
+    	insert into classroom(id,name,seating,teachBuildId) 
+    		values(#{id},#{name},#{seating},#{teachBuildId})
+    </insert>
+	
+	
+	 <delete id="delete" parameterType="String">
+        delete from classroom where id=#{id}
+    </delete>
+    
+    
+    <update id="update" parameterType="Classroom">
+        update classroom set name=#{name},seating=#{seating},teachBuildId=#{teachBuildId} where id=#{id}
+    </update>
+    
+    
+    <select id="findById" parameterType="String" resultType="Classroom">
+        select * from classroom where id=#{id} 
+    </select>
+	
+	
+	 <select id="findAll" resultType="Classroom">
+        select * from classroom
+     </select>
+	
+	
+</mapper>

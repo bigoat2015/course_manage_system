@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+	<!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->
+<mapper namespace="cn.cms.dao.ITimeTable">
+	
+	<insert id="add" parameterType="TimeTable">
+    	insert into timeTable(classId,teacherId,courseId,credit,period,examination,studentCount,week,section,locale) 
+    		values(#{classId},#{teacherId},#{courseId},#{credit},#{period},#{examination},#{studentCount},#{week},#{section},#{locale})
+    </insert>
+	
+	
+	 <delete id="delete" parameterType="String">
+        delete from timeTable where id=#{id}
+    </delete>
+    
+    
+    <update id="update" parameterType="TimeTable">
+        update timeTable set classId=#{classId},teacherId=#{teacherId},courseId=#{courseId},credit=#{credit},period=#{period},examination=#{examination},studentCount=#{studentCount},week=#{week},section=#{section},locale=#{locale} where id=#{id}
+    </update>
+    
+    
+    <select id="findByClassId" parameterType="String" resultType="TimeTable">
+        select * from timeTable where classId=#{classId} 
+    </select>
+	
+	 <select id="findByTeacherId" parameterType="String" resultType="TimeTable">
+        select * from timeTable where teacherId=#{teacherId}
+     </select>
+     
+     <select id="findAll" resultType="TimeTable">
+        select * from timetable
+     </select>
+	
+	
+<!--	 findById必须和接口中的方法名一样  返回一个User  就是刚才的别名  如果不弄别名要连类路径一起写 麻烦-->
+<!--	<select id="findById" parameterType="School" resultType="boolean">-->
+<!--		select-->
+<!--		* from butone.student where id=#{id}-->
+<!--    </select>-->
+<!--    -->
+</mapper>
